@@ -3,6 +3,7 @@ import java.sql.SQLOutput;
 import java.util.Scanner;
 
 
+
 public class Main {
     public static double Addition(double Nomber1, double Nomber2){
         return Nomber1 + Nomber2;
