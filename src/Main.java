@@ -1,33 +1,46 @@
-
 import java.util.Scanner;
 
-
 public class Main {
-    public static double Addition(double Nomber1, double Nomber2){
+    public static double Addition(double Nomber1, double Nomber2) {
+
         return Nomber1 + Nomber2;
     }
-    public static double Soustraction(double Nomber1 ,double Nomber2){
+
+    public static double Soustraction(double Nomber1, double Nomber2) {
         return Nomber1 - Nomber2;
     }
-    public static double Multiplication(double Nomber1, double Nomber2){
+
+    public static double Multiplication(double Nomber1, double Nomber2) {
         return Nomber1 * Nomber2;
     }
-    public static double Division(double Nomber1 , double Nomber2){
+
+    public static double Division(double Nomber1, double Nomber2) {
         return Nomber1 / Nomber2;
     }
-    public static double Puissance(double Nomber1 , double Nomber2){
+
+    public static double Puissance(double Nomber1, double Nomber2) {
         return Math.pow(Nomber1, Nomber2);
     }
-    public static double Racine(double Nomber1){
+
+    public static double Racine(double Nomber1) {
         return Math.sqrt(Nomber1);
     }
-    public static double Factorielle(double Nomber1){
-        return Math.cos(Nomber1);
+
+    public static double Factorielle(double Nomber1) {
+        if (Nomber1 < 0) {
+            throw new IllegalArgumentException("La factorielle d'un nombre négatif n'est pas définie !");
+        }
+        int resultat = 1;
+        for (int i = 1; i <= (int) Nomber1; i++) {
+            resultat *= i;
+        }
+        return resultat;
     }
+
     public static void main(String[] args) {
-        double Nomber1 = 0 , Nomber2 = 0;
-        int chose ;
-        Scanner input = new Scanner(System.in);
+        double Nomber1 = 0, Nomber2 = 0;
+        int chose;
+        Scanner add = new Scanner(System.in);
         while (true) {
             System.out.println("-------MENUE-------");
             System.out.println("1-Addition");
@@ -38,26 +51,72 @@ public class Main {
             System.out.println("6-Racine carrée");
             System.out.println("7-Factorielle");
             System.out.println("8-Quitter");
+            System.out.print("Choisir une operation parmi menu : ");
 
-            System.out.print("choisir une operation parmi menu  : ");
-            chose = input.nextInt();
-            if (chose >= 1 && chose <= 5){
-            System.out.print("Entre 1ere Nbr : ");
-            Nomber1 = input.nextDouble();
-            System.out.print("Entre 2eme Nbr : ");
-            Nomber2 = input.nextDouble();}
-            else if (chose == 6){
-                System.out.print("Entrer un nombre : ");
-                Nomber1 = input.nextDouble();
+
+            while(true){
+                try {
+                    chose = add.nextInt();
+                    break;
+                } catch (Exception e) {
+                    add.nextLine();
+                    System.err.println("invalid inpout");
+
+                }
+
             }
-            else if (chose == 7){
+
+            if (chose >= 1 && chose <= 5) {
+                System.out.print("Entrer le 1er nombre : ");
+
+                while(true){
+                    try {
+                        Nomber1 = add.nextDouble();
+                        break;
+                    } catch (Exception e) {
+                        add.nextLine();
+                        System.err.println("invalid chose");
+
+                    }
+
+                }
+
+                System.out.print("Entrer le 2eme nombre : ");
+
+                while(true){
+                    try {
+                        Nomber2 = add.nextDouble();
+                        break;
+                    } catch (Exception e) {
+                        add.nextLine();
+                        System.err.println("invalid chose !!!");
+
+                    }
+
+                }
+
+
+            } else if (chose == 6 || chose == 7) {
                 System.out.print("Entrer un nombre : ");
-             Nomber1 = input.nextDouble();
-            }
-            else if (chose == 8){
-                System.out.print("Merci d'avoir utilisé la calculatrice. À bientôt !  ");
+
+
+                while(true){
+                    try {
+                        Nomber1 = add.nextDouble();
+                        break;
+                    } catch (Exception e) {
+                        add.nextLine();
+                        System.err.println("invalid chose !!!");
+
+                    }
+
+                }
+
+            } else if (chose == 8) {
+                System.out.println("Merci d'avoir utilisé la calculatrice. À bientôt !");
                 break;
             }
+
             switch (chose) {
                 case 1:
                     System.out.println("Addition est : " + Addition(Nomber1, Nomber2));
@@ -66,11 +125,11 @@ public class Main {
                     System.out.println("Soustraction est : " + Soustraction(Nomber1, Nomber2));
                     break;
                 case 3:
-                    System.out.println("Multiplication est :" + Multiplication(Nomber1, Nomber2));
+                    System.out.println("Multiplication est : " + Multiplication(Nomber1, Nomber2));
                     break;
                 case 4:
                     if (Nomber2 == 0) {
-                        System.out.println("ERREUR !!!");
+                        System.out.println("ERREUR : Division par zéro !");
                     } else {
                         System.out.println("Division est : " + Division(Nomber1, Nomber2));
                     }
@@ -79,15 +138,23 @@ public class Main {
                     System.out.println("Puissance est : " + Puissance(Nomber1, Nomber2));
                     break;
                 case 6:
-                    System.out.println("Racine carrée est : " + Racine(Nomber1));
+                    if (Nomber1 < 0) {
+                        System.out.println("ERREUR : Racine carrée d'un nombre négatif non définie !");
+                    } else {
+                        System.out.println("Racine carrée est : " + Racine(Nomber1));
+                    }
                     break;
                 case 7:
+                    if (Nomber1 < 0 || Nomber1 != (int) Nomber1) {
+                        System.out.println("ERREUR : La factorielle est définie uniquement pour les entiers positifs !");
+                    } else {
                         System.out.println("Factorielle est : " + Factorielle(Nomber1));
-                        break;
+                    }
+                    break;
                 default:
-                    System.out.println("invalid chose");
+                    System.out.println("Le numéro que vous avez saisi n'existe pas dans la liste.");
             }
         }
-
+        add.close();
     }
 }
